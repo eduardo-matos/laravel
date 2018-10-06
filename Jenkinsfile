@@ -1,9 +1,4 @@
 node('php'){
-    stage('Clean'){
-        deleteDir()
-        sh 'ls -la'
-    }
-
     stage('Fetch') {
         checkout scm
     }
@@ -32,10 +27,15 @@ node('php'){
     }
 
     stage('Docker Build') {
-        sh 'docker build -t jeffersonsouza/laravel:$BUILD_NUMBER .'
+        sh 'sudo docker build -t ematos/laravel:$BUILD_NUMBER .'
     }
 
     stage('Docker Ship') {
-        sh 'docker push jeffersonsouza/laravel:$BUILD_NUMBER'
+        sh 'sudo docker push ematos/laravel:$BUILD_NUMBER'
+    }
+    
+    stage('Cleanup') {
+        sh 'sudo docker rmi ematos/laravel'
+        deleteDir()
     }
 }
