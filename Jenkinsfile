@@ -35,7 +35,7 @@ node('php'){
     }
     
     stage('Cleanup') {
-        sh 'sudo docker rmi ematos/laravel'
+        sh 'sudo docker rmi ematos/laravel:$BUILD_NUMBER'
         deleteDir()
     }
 }
