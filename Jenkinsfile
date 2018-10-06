@@ -9,14 +9,14 @@ node('php'){
     }
 
     stage('Docker Build') {
-        sh 'docker build -t ematos/laravel:$BUILD_NUMBER .'
+        sh 'sudo docker build -t ematos/laravel:$BUILD_NUMBER .'
     }
 
     stage('Docker Ship') {
-        sh 'docker push ematos/laravel:$BUILD_NUMBER'
+        sh 'sudo docker push ematos/laravel:$BUILD_NUMBER'
     }
     
     stage('Docker Clean') {
-        sh 'docker rmi -f ematos/laravel:$BUILD_NUMBER'
+        sh 'sudo docker rmi -f ematos/laravel:$BUILD_NUMBER'
     }
 }
